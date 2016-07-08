@@ -1,0 +1,40 @@
+{
+    "name": "赖家桥站街区",
+    "thumb": "images/thumb.jpg",
+    "menus":
+    [
+        {
+            "name":"车站概况",
+            "content":"<p>赖家桥车站位于沙坪坝区中梁山西侧，大学路北侧，科技大道路边，主管中队是沙坪坝支队西永中队。</p><p>车站为岛式高架三层建筑形式，建筑结构为框架，占地面积2556.57㎡，建筑面积7522.61㎡。地面层为空置房，地上二层为站厅层，地上三层为站台层。</p><p>车站共分为5个防火分区，安全出口数量3个，安全出口总宽度12.6m，疏散楼梯4个，甲级防火门29个，室内消火栓15个（其中站台3个，站厅6个，设备区6个），室外消火栓4个，水泵接合器2组（地面层车站纵向两端各1组），灭火器62个（其中站台12个，站厅24个，设备区26个）</p><p>联系人：辜青松，电话：63351771</p><p>联系人：邓武，电话：63351672</p><img src='images/desc.jpg'/>"
+        },
+        {
+            "name":"车站立体图",
+            "content": "<img src='images/img-3d.jpg'/>"
+        },
+        {
+            "name":"车站平面图",
+            "content":
+            [
+                {"name":"站厅层（二层）总平面图", "content":"<img src='images/img-2d-1.jpg'/>"},
+                {"name":"站厅层A端平面图", "content":"<img src='images/img-2d-2.jpg'/>"},
+                {"name":"站厅层B端平面图", "content":"<img src='images/img-2d-3.jpg'/>"},
+                {"name":"站台层A端平面图", "content":"<img src='images/img-2d-4.jpg'/>"},
+                {"name":"站台层B端平面图", "content":"<img src='images/img-2d-5.jpg'/>"}
+            ]
+        },
+        {
+            "name":"其他",
+            "content":
+            [
+                {"name":"1号出入口", "content":"<img src='images/other-1-1.png'/><p>1号出入口，位于站厅层（2层）中部，通往西永换乘枢纽</p>"},
+                {"name":"2号出入口", "content":"<img src='images/other-2-1.png'/><img src='images/other-2-2.png'/><p>2号出入口，位于站厅层（2层）中部，通往站外，可到达科技大道北线。</p>"},
+                {"name":"1号疏散楼梯", "content":"<img src='images/other-3-1.png'/><img src='images/other-3-2.png'/><p>1号疏散楼梯，位于站厅层（2层）A端，车控室和警务室之间，可通往站台层（3层）</p>"},
+                {"name":"室内消火栓", "content":"<img src='images/other-4-1.png'/><img src='images/other-4-2.png'/><p>室内消火栓，位于站台层（3层）A端底部，内有灭火器4个，直流水枪1把，65mm水带1盘，均为卡扣式，管网管径为150mm，最不利点的压力为0.38Mpa</p>"},
+                {"name":"2号疏散楼梯", "content":"<img src='images/other-5-1.jpg'/><p>2号疏散楼梯，位于站厅层（2层）B端，可通往站台层（3层）</p>"},
+                {"name":"残疾人电梯", "content":"<img src='images/other-6-1.jpg'/><p>残疾人电梯，位于站厅层（2层）B端，2号疏散楼梯旁，可通往站台层（3层）、地面1层</p>"},
+                {"name":"车控室", "content":"<img src='images/other-7-1.png'/><p>车控室，位于站厅层（2层）A端办公区，1号疏散楼梯右侧</p>"}
+            ]
+        }
+    ]
+
+}

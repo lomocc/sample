@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script language="javascript">
+var selectTab;
+$(function(){
+ 	$(".menu .menu-header li a").mouseover(function(event)
+  {
+  	changeTab(event.currentTarget);
+  });
+  $(document).bind("click", function(event)
+  {
+			changeTab(null);
+			if(typeof(selectTab) != "undefined")
+				$("ul." + selectTab).unbind("mouseleave");
+	});
+
+});
+
+function changeTab(node)
+{
+	if(typeof(selectTab) != "undefined")
+	{
+		$(".selectItem").each(function(){$(this).removeClass("selectItem");});
+	}
+	if(typeof(node) != "undefined")
+	{
+		var ta = $(node);
+		ta.addClass("selectItem");
+		var tx = ta.offset().left;
+  	var tw = ta.outerWidth();
+
+  	var ix = tx - $(".menu").offset().left
+  	var iw = tw > 200?tw:200;
+  	
+		selectTab = ta.attr("tab");
+		var item = $("ul." + selectTab);
+		item.addClass("selectItem");
+
+		item.css("left", ix + "px");
+
+		item.css("width", iw + "px");
+		
+		item.one("mouseleave", function(event)
+		{
+			changeTab(null);
+  	});
+  	
+	}
+}
+
+</script> 
+
+<style>
+	
+	body{background-color:rgb(160,167,168);}
+.menu ul,.menu li
+{ list-style:none;}
+
+.menu
+{line-height:10px;
+	margin:0;padding:0; background-color:rgb(228,232,232);height:49px;
+}
+.menu *
+{margin:0;padding:0;}
+ul.menu-header
+{white-space:nowrap;}
+
+.menu-content ul
+{
+	display:none;
+}
+
+
+
+.menu .menu-header li
+{
+	line-height:1em; border-right:1px rgb(218,221,221) solid;
+	display:inline-block;_display:inline;_zoom:1;
+}
+.menu .menu-header li a, .menu .menu-header li a:link
+{
+	line-height:1.8em; padding:10px; text-decoration:none;
+	color:rgb(77,77,77); float:left; display:inline;
+	background-color:rgb(218,221,221);
+}	
+.menu .menu-content ul li
+{
+	width:100%;display:inline-block;_display:inline;_zoom:1;
+	}
+.menu .menu-content li a, .menu .menu-content li a:link
+{
+	width:90%;display:inline-block;_display:inline;_zoom:1; padding:5px 5%;
+	color:rgb(77,77,77); border-top:1px rgb(223,224,224) solid;
+	text-decoration:none;line-height:39px;background-color:rgb(233,234,234);
+}
+.menu .menu-content li a:hover
+{
+	color:rgb(218,221,221); background-color:rgb(123,127,127);
+}
+
+.menu .menu-header  a.selectItem, .menu .menu-header a.selectItem:link{background-color:rgb(233,234,234); }
+.menu-content ul.selectItem{   background-color:rgb(123,127,127);display:inline-block; position:relative;}
+</style>
+</head>
+<body>
+	
+
+
+
+
+
+
+<div class="menu">
+	<ul class="menu-header">
+	<li><a href="javascript:void(0)" tab="tab1"><span>知道首页</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab2"><span>知道团队</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab3"><span>知道公社</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab4"><span>知道活动</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab5"><span>小桔灯</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab6"><span>经验</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab7"><span>电子商务人才</span></a>
+		</li><li><a href="javascript:void(0)" tab="tab8"><span>苏州网站建设</span></a>
+		</li></ul>
+		<div class="menu-content">
+        <ul class="tab1">
+             <li><a href="#"><span>二级导航1</span></a></li>
+             <li><a href="#"><span>二级导航1</span></a></li>
+             <li><a href="#"><span>二级导航1</span></a></li>
+             <li><a href="#"><span>二级导航1</span></a></li>
+             <li><a href="#"><span>二级导航1</span></a></li>
+             <li><a href="#"><span>二级导航1</span></a></li>
+             <li><a href="#"><span>二级导航1</span></a></li>
+        </ul>
+        <ul class="tab2">
+             <li><a href="#"><span>二级导航2</span></a></li>
+             <li><a href="#"><span>二级导航2</span></a></li>
+             <li><a href="#"><span>二级导航2</span></a></li>
+             <li><a href="#"><span>二级导航2</span></a></li>
+             <li><a href="#"><span>二级导航2</span></a></li>
+             <li><a href="#"><span>二级导航2</span></a></li>
+             <li><a href="#"><span>二级导航2</span></a></li>
+        </ul>
+        <ul class="tab3">
+             <li><a href="#"><span>二级导航3</span></a></li>
+             <li><a href="#"><span>二级导航3</span></a></li>
+             <li><a href="#"><span>二级导航3</span></a></li>
+             <li><a href="#"><span>二级导航3</span></a></li>
+             <li><a href="#"><span>二级导航3</span></a></li>
+             <li><a href="#"><span>二级导航3</span></a></li>
+             <li><a href="#"><span>二级导航3</span></a></li>
+        </ul>
+        <ul class="tab4">
+             <li><a href="#"><span>二级导航4</span></a></li>
+             <li><a href="#"><span>二级导航4</span></a></li>
+             <li><a href="#"><span>二级导航4</span></a></li>
+             <li><a href="#"><span>二级导航4</span></a></li>
+             <li><a href="#"><span>二级导航4</span></a></li>
+             <li><a href="#"><span>二级导航4</span></a></li>
+             <li><a href="#"><span>二级导航4</span></a></li>
+        </ul>
+        <ul class="tab5">
+             <li><a href="#"><span>二级导航5</span></a></li>
+             <li><a href="#"><span>二级导航5</span></a></li>
+             <li><a href="#"><span>二级导航5</span></a></li>
+             <li><a href="#"><span>二级导航5</span></a></li>
+             <li><a href="#"><span>二级导航5</span></a></li>
+             <li><a href="#"><span>二级导航5</span></a></li>
+             <li><a href="#"><span>二级导航5</span></a></li>
+        </ul>
+        <ul class="tab6">
+             <li><a href="#"><span>二级导航6</span></a></li>
+             <li><a href="#"><span>二级导航6</span></a></li>
+             <li><a href="#"><span>二级导航6</span></a></li>
+             <li><a href="#"><span>二级导航6</span></a></li>
+             <li><a href="#"><span>二级导航6</span></a></li>
+             <li><a href="#"><span>二级导航6</span></a></li>
+             <li><a href="#"><span>二级导航6</span></a></li>
+        </ul>
+        <ul class="tab7">
+             <li><a href="#"><span>二级导航7</span></a></li>
+             <li><a href="#"><span>二级导航7</span></a></li>
+             <li><a href="#"><span>二级导航7</span></a></li>
+             <li><a href="#"><span>二级导航7</span></a></li>
+             <li><a href="#"><span>二级导航7</span></a></li>
+             <li><a href="#"><span>二级导航7</span></a></li>
+             <li><a href="#"><span>二级导航7</span></a></li>
+        </ul>
+        <ul class="tab8">
+             <li><a href="#"><span>二级导航8</span></a></li>
+             <li><a href="#"><span>二级导航8</span></a></li>
+             <li><a href="#"><span>二级导航8</span></a></li>
+             <li><a href="#"><span>二级导航8</span></a></li>
+             <li><a href="#"><span>二级导航8</span></a></li>
+             <li><a href="#"><span>二级导航8</span></a></li>
+             <li><a href="#"><span>二级导航8</span></a></li>
+        </ul>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+        #allmap{height:100%;width:100%;}
+        li, ul{list-style: none; padding:0;margin:0;}
+        #nav li{border:1px #999 solid;float: left;margin-left: 20px;}
+        #nav a,#nav a:link{color:#000;text-decoration: none;}
+        #nav a:hover{color:#fff; background-color: #000;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F8a8af51737ad5845764e9b425d16ff0"></script>
+    <title>重庆轻轨消防示意图</title>
+</head>
+<body>
+<list id="nav">
+    <li onclick="selectLine(1);"><a href="#">一号线</a></li>
+    <li onclick="selectLine(4);"><a href="#">二号线</a></li>
+    <li onclick="selectLine(3);"><a href="#">三号线</a></li>
+    <li onclick="selectLine(2);"><a href="#">六号线</a></li>
+
+</list>
+<div id="allmap"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    //map.centerAndZoom("重庆", 15);
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+    var pointsMap = {};
+    var linesMap = {};
+    function addPoint(id, x, y, data)
+    {
+        var point = new BMap.Point(x, y); // 创建点
+        pointsMap[id] = {point:point, marker:undefined, data:data};
+    }
+    function addMarker(id)
+    {
+        var marker = new BMap.Marker( pointsMap[id].point ); // 创建点
+        if(typeof pointsMap[id].data != "undefined")
+        {
+            var label = new BMap.Label(pointsMap[id].data, {offset:new BMap.Size(20,-10)});
+            label.setStyle({
+                color : "#ffffff",
+                fontSize : "20px",
+                height : "30px",
+                lineHeight : "30px",
+                fontFamily:"微软雅黑",
+                borderColor:"#446699",
+                backgroundColor:"#4477ff"
+            });
+            marker.setLabel(label);
+        }
+        marker.addEventListener("click", markerClickHandler);
+        marker.data = id;
+        map.addOverlay(marker);
+        pointsMap[id].marker = marker;
+    }
+    function markerClickHandler(e)
+    {
+        var p = e.target;
+        console.log(p.data);
+
+        var point = pointsMap[p.data];
+
+        var opts = {
+            width : 430,     // 信息窗口宽度
+            title : point.data || "未知", // 信息窗口标题
+            enableMessage:false,//设置允许信息窗发送短息
+        }
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var sContent = "<img id='imgDemo' style='float:right;margin:4px' src='images/desc.jpg' width='280'/>" +
+                "<p><a href='" + p.data + ".html'/>点击链接打开</a><p>导航链接包含：</p><ul><li>1.街景图</li><li>2.总平面图</li><li>3.立体楼层图</li><li>4.楼层消防图</li><li>5.消防实景图</li><ul></p>" ;
+        var infoWindow = new BMap.InfoWindow(sContent, opts);  // 创建信息窗口对象
+        map.openInfoWindow(infoWindow, point); //开启信息窗口
+        document.getElementById('imgDemo').onload = function (){
+            infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+        }
+    }
+    function addPolyline(id, ids, color, wight, opacity)
+    {
+        console.log(typeof color)
+        if(typeof color == "undefined")
+        {
+            color = "blue";
+        }
+        if(typeof wight == "undefined")
+        {
+            wight = 2;
+        }
+        if(typeof opacity == "undefined")
+        {
+            opacity = 0.5;
+        }
+        var points = ids.map(function(id)
+        {
+            if(typeof pointsMap[id] == "undefined")
+            {
+
+                console.log(id)
+            }
+                if (typeof pointsMap[id] == "undefined" || typeof pointsMap[id].marker == "undefined") {
+                    addMarker(id);
+                }
+              return pointsMap[id].point;
+
+        });
+        var polyline = new BMap.Polyline(points, {strokeColor:color, strokeWeight:wight, strokeOpacity:opacity});   //创建折线
+        map.addOverlay(polyline);
+        linesMap[id] = polyline;
+    }
+
+    addPoint(0, 106.300813, 29.612955);
+    addPoint(1, 106.31691, 29.612955);
+    addPoint(2, 106.33617, 29.612704);
+    addPoint(3, 106.370665, 29.61396);
+    addPoint(4, 106.391074, 29.614463, "赖家桥");// 赖家桥
+    addPoint(5, 106.451728, 29.611699);
+    addPoint(6, 106.451728, 29.595119);
+    addPoint(7, 106.45374, 29.582304);
+    addPoint(8, 106.452303, 29.573258);
+    addPoint(9, 106.45719, 29.568232);
+    addPoint(10, 106.467825, 29.562452);
+    addPoint(11, 106.476162, 29.558179);
+    addPoint(12, 106.476162, 29.550387);
+    addPoint(13, 106.475874, 29.542092);
+    addPoint(14, 106.491684, 29.538322);
+    addPoint(15, 106.505195, 29.539327);
+    addPoint(16, 106.514969, 29.544857);
+    addPoint(17, 106.525883, 29.546271);
+    addPoint(18, 106.540382, 29.553985);
+    addPoint(19, 106.57016, 29.559687);
+    addPoint(20, 106.578784, 29.558933);
+    addPoint(21, 106.589995, 29.564462);
+
+    addPoint(100, 106.644792, 29.724456);
+    addPoint(101, 106.639761, 29.716489);
+    addPoint(102, 106.625101, 29.703189);
+    addPoint(103, 106.612812, 29.696036);
+    addPoint(104, 106.595205, 29.693275);
+    addPoint(105, 106.579251, 29.692334);
+    addPoint(106, 106.570412, 29.680662);
+    addPoint(107, 106.567034, 29.667294);
+    addPoint(108, 106.574077, 29.649215);
+    addPoint(109, 106.577311, 29.641305);
+    addPoint(110, 106.561716, 29.634399);
+    addPoint(111, 106.556542, 29.622783);
+    addPoint(112, 106.555823, 29.612359);
+    addPoint(113, 106.55532, 29.607146);
+    addPoint(114, 106.547272, 29.605136);
+    addPoint(115, 106.536851, 29.605199);
+    addPoint(116, 106.528946, 29.600866);
+    addPoint(117, 106.532899, 29.591256);
+    addPoint(118, 106.539798, 29.578881);
+    addPoint(119, 106.543966, 29.569834);
+    addPoint(120, 106.549014,29.565224);
+
+    addPoint(121, 106.555141, 29.558713);
+    addPoint(122, 106.557979, 29.542155);
+    addPoint(123, 106.569406, 29.537913);
+    addPoint(124, 106.576485, 29.532257);
+    addPoint(125, 106.582916, 29.522672);
+    addPoint(126, 106.580365, 29.513494);
+    addPoint(127, 106.579754, 29.50397);
+    addPoint(128, 106.579359, 29.494917);
+    addPoint(129, 106.572245, 29.484322);
+    addPoint(130, 106.569118, 29.47316);
+    addPoint(131, 106.565525, 29.464796);
+    addPoint(132, 106.560926, 29.454669);
+    addPoint(133, 106.556686, 29.438126);
+    addPoint(134, 106.550218, 29.419283);
+    addPoint(135, 106.549751, 29.403929);
+    addPoint(136, 106.545691, 29.38338);
+    addPoint(137, 106.530276, 29.381428);
+    addPoint(138, 106.512633, 29.381869);
+
+    addPoint(200, 106.444362, 29.831634);
+    addPoint(201, 106.405842, 29.808823);
+    addPoint(202, 106.41037, 29.795221);
+    addPoint(203, 106.498835, 29.741925);
+    addPoint(204, 106.498835, 29.685462);
+    addPoint(205, 106.495529, 29.673664);
+    addPoint(206, 106.485899, 29.640521);
+    addPoint(207, 106.485037, 29.634054);
+    addPoint(208, 106.506021, 29.62181);
+    addPoint(209, 106.505878, 29.604037);
+    addPoint(210, 106.50559, 29.59537);
+    addPoint(211, 106.519316, 29.588649);
+    addPoint(212, 106.544685, 29.594302);
+    addPoint(213, 106.557908, 29.590031);
+    addPoint(214, 106.572352, 29.591224);
+    addPoint(215, 106.578748, 29.581896);
+    addPoint(216, 106.584354, 29.57486);
+    addPoint(217, 106.602823, 29.562043);
+    addPoint(218, 106.662111, 29.531125);
+    addPoint(219, 106.665632, 29.520377);
+    addPoint(220, 106.656003, 29.503027);
+    addPoint(221, 106.649822, 29.493471);
+
+    addPoint(300, 106.581892, 29.564148);
+    addPoint(301, 106.571598, 29.569567);
+    addPoint(302, 106.564896, 29.57241);
+    addPoint(303, 106.556237, 29.572708);
+    addPoint(304, 106.549212, 29.56703);
+    addPoint(305, 106.544181, 29.558917);
+    addPoint(306, 106.537947, 29.555304);
+    addPoint(307, 106.520358, 29.534959);
+    addPoint(308, 106.524131, 29.524903);
+    addPoint(309, 106.520466, 29.513557);
+    addPoint(310, 106.515867, 29.505793);
+    addPoint(311, 106.505482, 29.505306);
+    addPoint(312, 106.495421, 29.501911);
+    addPoint(313, 106.491541, 29.494524);
+    addPoint(314, 106.48466, 29.487513);
+    addPoint(315, 106.482701, 29.477814);
+    addPoint(316, 106.478982, 29.472971);
+    addPoint(317, 106.481282, 29.455802);
+    addPoint(318, 106.482055, 29.443929);
+    addPoint(319, 106.489151, 29.43347);
+    addPoint(320, 106.498808, 29.420572);
+    addPoint(321, 106.5078, 29.389839);
+
+    addPolyline(0, [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18, 121,19,20,21], "red");
+    addPolyline(1, [200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,21,217,218,219,220,221], "green");
+    addPolyline(2, [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138], "blue");
+    addPolyline(3, [20,300,301,302,303,304,305,306,17,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321, 138], "red");
+
+
+    var clickPoints = [];
+    map.addEventListener("click",function(e){
+//        if(e.ctrlKey)
+//        {
+//            clickPoints.push("addPoint(" + clickPoints.length+ ", " + e.point.lng + ", "+ e.point.lat +");")
+//            console.log(e.point.lng + "," + e.point.lat);
+//        }else if(e.shiftKey) {
+//            console.log(clickPoints.join("\n"));
+//        }
+
+        if(e.ctrlKey)
+        {
+            selectLine(1);
+        }else if(e.shiftKey)
+        {
+            selectLine(2);
+        }
+
+    });
+
+    var highlightLineNumber;
+    function selectLine(lineNumber)
+    {
+        if(typeof highlightLineNumber != "undefined")
+        {
+            setHightlight(highlightLineNumber, false);
+        }
+        if(typeof lineNumber != "undefined")
+        {
+            lineNumber = lineNumber - 1;
+            setHightlight(lineNumber, true);
+        }
+        highlightLineNumber = lineNumber;
+    }
+    function setHightlight(id, value)
+    {
+        var polyline = linesMap[id];
+        if(typeof polyline == "undefined")
+        {
+            var sitePoints = [];
+            for(var i in pointsMap)
+            {
+                sitePoints.push(pointsMap[i]);
+            }
+            map.setViewport(sitePoints);
+            return;
+        }
+        if(value)
+        {
+           polyline.setStrokeWeight(8);
+           var path = polyline.getPath();
+           var xMin,xMax,yMin,yMax;
+           for(var i in path)
+            {
+                var point = path[i];
+                if(typeof xMin == "undefined")
+                {
+                    xMin = point.lng;
+                }else if(point.lng < xMin)
+                {
+                    xMin = point.lng;
+                }
+                if(typeof xMax=='undefined')
+                {
+                    xMax = point.lng;
+                }else if(point.lng > xMax)
+                {
+                    xMax = point.lng;
+                }
+                if(typeof yMin == "undefined")
+                {
+                    yMin = point.lat;
+                }else if(point.lat < yMin)
+                {
+                    yMin = point.lat;
+                }
+                if(typeof yMax == "undefined")
+                {
+                    yMax = point.lat;
+                }else if(point.lat > yMax)
+                {
+                    yMax = point.lat;
+                }
+            }
+//            map.panTo(new BMap.Point((xMin + xMax)/2.0, (yMin + yMax) /2.0));
+            map.setViewport(path);
+            console.log("[1",xMin,",2", xMax,",3", yMin,",4", yMax,"]");
+//            polyline.setStrokeColor("black");
+        }else
+        {
+            polyline.setStrokeWeight(2);
+//            polyline.setStrokeColor("white");
+        }
+    }
+
+    function getBoundary(){
+        var bdary = new BMap.Boundary();
+        bdary.get("重庆", function(rs){       //获取行政区域
+            //map.clearOverlays();        //清除地图覆盖物
+            var count = rs.boundaries.length; //行政区域的点有多少个
+            for(var i = 0; i < count; i++){
+                var ply = new BMap.Polyline(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000"}); //建立多边形覆盖物
+                map.addOverlay(ply);  //添加覆盖物
+//                map.setViewport(ply.getPath());    //调整视野
+            }
+        });
+    }
+
+    map.centerAndZoom(pointsMap[4].point, 15);// 赖家桥
+    setTimeout(function(){
+        getBoundary();
+
+    }, 2000);
+</script>

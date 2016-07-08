@@ -1,0 +1,11 @@
+{"file":"assets.png","frames":{
+"Goods0":{"x":1,"y":1,"w":59,"h":103,"offX":0,"offY":1,"sourceW":59,"sourceH":104},
+"Introduce":{"x":1,"y":106,"w":442,"h":273,"offX":0,"offY":0,"sourceW":442,"sourceH":273},
+"Logo":{"x":62,"y":1,"w":431,"h":84,"offX":0,"offY":3,"sourceW":431,"sourceH":88},
+"ResultBg":{"x":445,"y":87,"w":320,"h":214,"offX":0,"offY":0,"sourceW":320,"sourceH":214},
+"Background":{"x":767,"y":1,"w":480,"h":1689,"offX":0,"offY":0,"sourceW":480,"sourceH":1689},
+"Bullet":{"x":495,"y":1,"w":9,"h":20,"offX":1,"offY":1,"sourceW":10,"sourceH":23},
+"ButtonCircle":{"x":495,"y":23,"w":210,"h":45,"offX":0,"offY":0,"sourceW":210,"sourceH":45},
+"Bomb":{"x":445,"y":303,"w":61,"h":53,"offX":0,"offY":0,"sourceW":63,"sourceH":55},
+"Pause":{"x":707,"y":1,"w":42,"h":44,"offX":1,"offY":4,"sourceW":46,"sourceH":48},
+"Goods1":{"x":508,"y":303,"w":57,"h":88,"offX":1,"offY":2,"sourceW":58,"sourceH":90}}}

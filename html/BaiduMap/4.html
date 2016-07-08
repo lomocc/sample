@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/controller.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+        body{width:800px; margin: 0 auto;}
+        ul{padding:0;margin: 0;}
+        li{margin-right: 20px;}
+        .menu li{float: left;list-style: none;}
+        .menu a,#nav a:link{color:#000;text-decoration: none;}
+        .menu a:hover{}
+        img{width:100%; clear: left;}
+        .content{clear: left;margin-top: 60px;}
+        .content img{width: 800px;}
+        .pager li{float:left;}
+    </style>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body ng-controller="SiteCtrl">
+
+<h1>{{result.name}}</h1>
+
+<ul class="menu">
+    <li ng-repeat="menu in result.menus">
+        <button ng-click="$select($index);">{{menu.name}}</button>
+    </li>
+</ul>
+<div class="content" ng-bind-html="selectItem.content" ng-if="selectItem.isSimple">
+</div>
+
+<div class="content" ng-if="!selectItem.isSimple && selectItem2">
+    <div ng-bind-html="selectItem2.content" >
+    </div>
+    <span>{{selectItem2.name}}</span>
+    <ul class="pager">
+        <li ng-repeat="item in selectItem.content">
+            <button ng-click="$select2($index);">{{$index}}</button>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
